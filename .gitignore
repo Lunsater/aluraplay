@@ -1,0 +1,30 @@
+# Dependências do Composer
+vendor/
+
+# Dependências do Node.js (se usadas)
+node_modules/
+
+# Arquivos de log
+logs/
+storage/logs/
+
+# Arquivos de cache
+cache/
+storage/cache/
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.development
+.env.production
+
+# Arquivos temporários
+*.tmp
+*~
+
+# Arquivos gerados pela IDE
+.idea/
+.vscode
+
+# Arquivos de build (dependendo do seu build process)
+# public/build/
