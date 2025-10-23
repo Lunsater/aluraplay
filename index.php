@@ -4,10 +4,10 @@ $dbPath = __DIR__ . '/banco.sqlite';
 $pdo = new PDO('sqlite:' . $dbPath);
 $videoList = $pdo->query("SELECT * FROM videos")->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($videoList as $video) {
-    echo $video['id'] . " - " . $video['url'] . " - " . $video['title'] . ";\n";
-}
-exit;
+//foreach ($videoList as $video) {
+//    echo $video['id'] . " - " . $video['url'] . " - " . $video['title'] . ";\n";
+//}
+//exit;
 
 ?><!DOCTYPE html>
 <html lang="pt-br">
@@ -41,7 +41,7 @@ exit;
 
     <ul class="videos__container" alt="videos alura">
         <?php foreach ($videoList as $video) : ?>
-            <?php if (str_starts_with($video['url'], 'http')) : ?>
+            <?php if (!is_null($video['url']) && str_starts_with($video['url'], 'http')) : ?>
                 <li class="videos__item">
                     <iframe width="100%" height="72%" src="<?= $video['url']; ?>"
                         title="YouTube video player" frameborder="0"
@@ -52,7 +52,7 @@ exit;
                         <h3><?= $video['title']; ?></h3>
                         <div class="acoes-video">
                             <a href="./pages/enviar-video.html">Editar</a>
-                            <a href="../remover-video.html?=<?= $video['id'] ?>">Excluir</a>
+                            <a href="../remover-video.php?id=<?= $video['id'] ?>">Excluir</a>
                         </div>
                     </div>
                 </li>
