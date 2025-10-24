@@ -1,0 +1,19 @@
+{
+  "name": "alura/aluraplay",
+  "description": "Projeto para cadastrar vídeos do youtube",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "Alura\\Mvc\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Alcenor",
+      "email": "alcenor@hotmail.com"
+    }
+  ],
+  "require": {
+  }
+}
