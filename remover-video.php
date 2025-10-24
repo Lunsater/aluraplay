@@ -8,5 +8,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':id', $_GET['id']);
 
 if ($stmt->execute()) {
-    header('Location: index.php');
+    header('Location: /?sucesso=1');
+} else {
+    header('Location: /?sucesso=0');
 }
