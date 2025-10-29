@@ -1,5 +1,8 @@
 <?php
 
+use Alura\Mvc\Entity\Video;
+use Alura\Mvc\Repository\VideoRepository;
+
 $dbPath = __DIR__ . '/banco.sqlite';
 $pdo = new PDO('sqlite:' . $dbPath);
 
@@ -17,13 +20,11 @@ if (!filter_var($title)) {
     header('Location: /?sucesso=0');
     exit();
 }
-$sql = 'UPDATE videos SET url = :url, title = :title WHERE id = :id';
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue(':id', $id, PDO::PARAM_INT);
-$stmt->bindValue(':url', $url, PDO::PARAM_STR);
-$stmt->bindValue(':title', $title, PDO::PARAM_STR);
+$video = new Video($url, $title);
+$video->setId($id);
 
-if ($stmt->execute()) {
+$repository = new VideoRepository($pdo);
+if ($repository->update($video)) {
     header('Location: /?sucesso=1');
 } else {
     header('Location: /?sucesso=0');

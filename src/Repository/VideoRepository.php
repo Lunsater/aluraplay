@@ -15,8 +15,8 @@ class VideoRepository
     {
         $sql = 'INSERT INTO videos (url, title) VALUES (:url, :title)';
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':url', $video->url);
-        $stmt->bindParam(':title', $video->title);
+        $stmt->bindValue(':url', $video->url, PDO::PARAM_STR);
+        $stmt->bindValue(':title', $video->title, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             $video->setId($this->pdo->lastInsertId());
@@ -51,11 +51,11 @@ class VideoRepository
     public function all(): array
     {
         $videoList = $this->pdo->query('SELECT * FROM videos')->fetchAll(PDO::FETCH_ASSOC);
-        return array_map(callback: function (array $videoData) {
+        return array_map(function (array $videoData) {
             $video = new Video($videoData['url'], $videoData['title']);
             $video->setId($videoData['id']);
             return $video;
-        });
+        }, $videoList);
     }
 
 }
