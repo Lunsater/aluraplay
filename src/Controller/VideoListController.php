@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Alura\Mvc\Controller;
 use Alura\Mvc\Repository\VideoRepository;
-
+use PDO;
 class VideoListController
 {
-    public function __construct(private VideoRepository $videoRepository)
+    private readonly VideoRepository $repository;
+
+    public function __construct(private readonly PDO $pdo)
     {
+        $this->repository = new VideoRepository($pdo);
     }
 
     public function processaRequisicao(): void

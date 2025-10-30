@@ -2,14 +2,17 @@
 
 namespace Alura\Mvc\Controller;
 
-use Alura\Mvc\Controller\Controller;
 use Alura\Mvc\Repository\VideoRepository;
+use PDO;
+
 
 class DeleteVideoController implements Controller
 {
+    private readonly VideoRepository $repository;
 
-    public function __construct(private VideoRepository $repository)
+    public function __construct(private readonly PDO $pdo)
     {
+        $this->repository = new VideoRepository($pdo);
     }
 
     public function processaRequisicao(): void

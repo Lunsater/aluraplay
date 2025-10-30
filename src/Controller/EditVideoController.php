@@ -4,12 +4,16 @@ namespace Alura\Mvc\Controller;
 
 use Alura\Mvc\Entity\Video;
 use Alura\Mvc\Repository\VideoRepository;
+use PDO;
 
 class EditVideoController implements Controller
 {
 
-    public function __construct(private VideoRepository $repository)
+    private readonly VideoRepository $repository;
+
+    public function __construct(private readonly PDO $pdo)
     {
+        $this->repository = new VideoRepository($pdo);
     }
 
     public function processaRequisicao(): void
