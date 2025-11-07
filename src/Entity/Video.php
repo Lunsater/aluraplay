@@ -8,6 +8,7 @@ class Video
 {
     public readonly int $id;
     public readonly string $url;
+    private ?string $filePath;
 
     public function __construct(string $url, public readonly string $title)
     {
@@ -25,5 +26,21 @@ class Video
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @param string|null $filePath
+     */
+    public function setFilePath(?string $filePath): void
+    {
+        $this->filePath = $filePath;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFilePath(): ?string
+    {
+        return $this->filePath;
     }
 }

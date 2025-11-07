@@ -6,10 +6,16 @@
         <?php foreach ($videoList as $video) : ?>
             <?php if (!is_null($video->url) && str_starts_with($video->url, 'http')) : ?>
                 <li class="videos__item">
-                    <iframe width="100%" height="72%" src="<?= $video->url; ?>"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                    <?php if ($video->getFilePath() !== null) : ?>
+                        <a href="<?= $video->url; ?>">
+                            <img src="/img/<?= $video->getFilePath(); ?>" alt="Imagem" style="width: 100%;">
+                        </a>
+                    <?php else: ?>
+                        <iframe width="100%" height="72%" src="<?= $video->url; ?>"
+                                title="YouTube video player"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    <?php endif; ?>
                     <div class="descricao-video">
                         <img src="../public/img/logo.png" alt="logo canal alura">
                         <h3><?= $video->title; ?></h3>

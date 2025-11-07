@@ -23,12 +23,21 @@ class NewVideoController implements Controller
             header('Location: /?sucesso=0');
             return;
         }
+
         $title = $_POST['titulo'];
         if (!filter_var($title)) {
             header('Location: /?sucesso=0');
             return;
         }
-        if ($this->repository->add(new Video($url, $title))) {
+
+        $video = new Video($url, $title);
+        if ($_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+            $moveu = move_uploaded_file($_FILES['imagem']['tmp_name'],
+            __DIR__ . '/../../public/uploads/' . $_FILES['imagem']['name']);
+            $video->setFilePath('uploads/' . $_FILES['imagem']['name']);
+        }
+
+        if ($this->repository->add($video)) {
             header('Location: /?sucesso=1');
         } else {
             header('Location: /?sucesso=0');
