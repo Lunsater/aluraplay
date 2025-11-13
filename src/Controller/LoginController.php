@@ -22,9 +22,13 @@ class LoginController implements Controller
 
         $user = $this->repository->find($email);
 
-        $correctPassword = false;
-        if (!empty($user)) {
-            $correctPassword = password_verify($password, $user->password);
+        $correctPassword = $correctPassword = password_verify($password, $user->password);
+
+        if (password_needs_rehash($user->password, PASSWORD_ARGON2ID)) {
+            $stmt = $this->pdo->prepare("UPDATE users set password = :password WHERE id = :id");
+            $stmt->bindValue(":password", password_hash($password, PASSWORD_ARGON2ID), PDO::PARAM_STR);
+            $stmt->bindValue(":id", $user->id, PDO::PARAM_INT);
+            $stmt->execute();
         }
         if ($correctPassword) {
             $_SESSION['logado'] = true;

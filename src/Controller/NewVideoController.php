@@ -32,9 +32,15 @@ class NewVideoController implements Controller
 
         $video = new Video($url, $title);
         if ($_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
-            $moveu = move_uploaded_file($_FILES['imagem']['tmp_name'],
-            __DIR__ . '/../../public/uploads/' . $_FILES['imagem']['name']);
-            $video->setFilePath('uploads/' . $_FILES['imagem']['name']);
+            $safeFileName = pathinfo($_FILES['imagem']['name'], PATHINFO_BASENAME);
+            $finfo = new \finfo(FILEINFO_MIME_TYPE);
+            $mimeType = $finfo->file($_FILES['imagem']['tmp_name']);
+
+            if (str_starts_with($mimeType, 'image/')) {
+                move_uploaded_file($_FILES['imagem']['tmp_name'],
+                    __DIR__ . '/../../public/uploads/' . $safeFileName);
+                $video->setFilePath('uploads/' . $safeFileName);
+            }
         }
 
         if ($this->repository->add($video)) {

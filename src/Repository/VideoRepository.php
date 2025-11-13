@@ -43,9 +43,9 @@ class VideoRepository
         }
         $sql = 'UPDATE videos SET 
                   url = :url, 
-                  title = :title
-                  $updateImageSql
-              WHERE id = :id';
+                  title = :title '
+                  . $updateImageSql .
+              ' WHERE id = :id';
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':id', $video->id, PDO::PARAM_INT);
         $stmt->bindValue(':url', $video->url, PDO::PARAM_STR);

@@ -8,7 +8,7 @@
                 <li class="videos__item">
                     <?php if ($video->getFilePath() !== null) : ?>
                         <a href="<?= $video->url; ?>">
-                            <img src="/img/<?= $video->getFilePath(); ?>" alt="Imagem" style="width: 100%;">
+                            <img src="<?= $video->getFilePath(); ?>" alt="Imagem" style="width: 100%;">
                         </a>
                     <?php else: ?>
                         <iframe width="100%" height="72%" src="<?= $video->url; ?>"
