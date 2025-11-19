@@ -6,7 +6,7 @@
         <?php foreach ($videoList as $video) : ?>
             <?php if (!is_null($video->url) && str_starts_with($video->url, 'http')) : ?>
                 <li class="videos__item">
-                    <?php if ($video->getFilePath() !== null) : ?>
+                    <?php if ($video->getFilePath() !== null && $video->getFilePath() !== '') : ?>
                         <a href="<?= $video->url; ?>">
                             <img src="<?= $video->getFilePath(); ?>" alt="Imagem" style="width: 100%;">
                         </a>

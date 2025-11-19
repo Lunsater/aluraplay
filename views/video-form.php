@@ -34,7 +34,6 @@
                        accept="image/*"
                        type="file"
                        class="campo__escrita"
-                       required
                        id='imagem' />
             </div>
 

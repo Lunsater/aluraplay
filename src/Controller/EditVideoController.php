@@ -35,9 +35,10 @@ class EditVideoController implements Controller
         }
         $video = new Video($url, $title);
         $video->setId($id);
+        $video->setFilePath(null);
 
         if ($_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
-            $safeFileName = pathinfo($_FILES['imagem']['name'], PATHINFO_BASENAME);
+            $safeFileName = uniqid('upload_') . '_' . pathinfo($_FILES['imagem']['name'], PATHINFO_BASENAME);
             $finfo = new \finfo(FILEINFO_MIME_TYPE);
             $mimeType = $finfo->file($_FILES['imagem']['tmp_name']);
 

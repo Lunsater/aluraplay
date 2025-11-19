@@ -17,7 +17,12 @@ class VideoRepository
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':url', $video->url, PDO::PARAM_STR);
         $stmt->bindValue(':title', $video->title, PDO::PARAM_STR);
-        $stmt-> bindValue(":image_path", $video->getFilePath(), PDO::PARAM_STR);
+        if ($video->getFilePath() !== null) {
+            $stmt-> bindValue(":image_path", $video->getFilePath(), PDO::PARAM_STR);
+        } else {
+            $stmt-> bindValue(":image_path", null, PDO::PARAM_STR);
+        }
+
 
         if ($stmt->execute()) {
             $video->setId($this->pdo->lastInsertId());
