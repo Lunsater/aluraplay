@@ -24,6 +24,11 @@ class VideoFormController implements Controller
             $video = $this->repository->find($id);
         }
 
-        require_once __DIR__ . '/../../views/video-form.php';
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../../views');
+        $twig = new \Twig\Environment($loader);
+
+        echo $twig->render('video-form.html.twig', ['video' => $video]);
+
+        //require_once __DIR__ . '/../../views/video-form.php';
     }
 }

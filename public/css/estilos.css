@@ -92,7 +92,7 @@ body {
 }
 
 .pesquisar__botao {
-    background-image: url(../img/cabecalho/search.png);
+    /* background-image: url(../img/cabecalho/search.png); */
     background-repeat: no-repeat;
     background-position: center;
     border: 1px solid rgb(211, 211, 211);
