@@ -17,6 +17,7 @@
   "require": {
     "ext-pdo": "*",
     "ext-http": "*",
-    "ext-fileinfo": "*"
+    "ext-fileinfo": "*",
+    "twig/twig": "^3.0"
   }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Alura\Mvc\Controller;
 use Alura\Mvc\Repository\VideoRepository;
 use PDO;
+
 class VideoListController
 {
     private readonly VideoRepository $repository;
@@ -17,7 +18,13 @@ class VideoListController
     public function processaRequisicao(): void
     {
         $videoList = $this->repository->all();
-        require_once __DIR__ . '/../../views/video-list.php';
+
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../../views');
+        $twig = new \Twig\Environment($loader);
+
+        echo $twig->render('video-list.html.twig', ['videoList' => $videoList]);
+
+        //require_once __DIR__ . '/../../views/video-list.php';
     }
 
 }
