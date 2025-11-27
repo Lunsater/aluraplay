@@ -23,8 +23,6 @@ class VideoListController
         $twig = new \Twig\Environment($loader);
 
         echo $twig->render('video-list.html.twig', ['videoList' => $videoList]);
-
-        //require_once __DIR__ . '/../../views/video-list.php';
     }
 
 }
